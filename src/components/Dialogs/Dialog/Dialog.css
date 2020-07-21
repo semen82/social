@@ -1,0 +1,16 @@
+.dialogs-list .dialog {
+  font-size: 18px;
+  padding: 10px 50px 10px 10px;
+  cursor: pointer;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.dialogs-list .dialog.active {
+  background-color: #e3bbff;
+}
+
+.dialogs-list .dialog a {
+  text-decoration: none;
+  color: #232323;
+}

@@ -1,0 +1,51 @@
+.dialogs {
+  width: 100%;
+  padding: 15px;
+  background-color: #fff8dc;
+  border: 1px solid #cbcbcb;
+  display: flex;
+}
+
+.dialogs ul {
+  list-style: none;
+}
+
+.dialogs-list {
+  /*width: 25%;*/
+  /*min-width: 200px;*/
+}
+
+.dialogs .add-message {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.dialogs .add-message textarea {
+  width: 100%;
+  height: 40px;
+  padding: 10px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  border: 1px solid #32bb00;
+  outline: none;
+}
+
+.dialogs button {
+  background-color: #279200;
+  padding: 5px 20px;
+  font-size: 18px;
+  color: cornsilk;
+  outline: none;
+  border: 1px solid #279200;
+
+}
+
+.dialogs button:hover {
+  background-color: #34d400;
+  color: #000000;
+}
+
+.dialogs button:active {
+  color: crimson;
+}

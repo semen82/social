@@ -1,0 +1,9 @@
+.profile-header {
+    margin-bottom: 15px;
+    box-shadow: 2px 2px 5px rgba(163, 163, 163, 0.342);
+  }
+  
+  .profile-header img {
+    width: 100%;
+    vertical-align: middle;
+  }
