@@ -1,10 +1,10 @@
 import React from 'react';
-import avatar from './avatar.jpg';
-import './About.css';
+import './Info.css';
+import avatar from "./avatar.jpg";
 
-function Post() {
+function Info(props) {
   return (
-    <div className="profile-about">
+    <div className="profile-info">
       <div className="avatar">
         <img src={avatar} alt="Аватарка"/>
       </div>
@@ -25,8 +25,7 @@ function Post() {
           <li className="list-item">
             <span>Сайт:&nbsp;&nbsp;
               <a
-                href="webstroyka.com.ua"
-                target="_blank">
+                href="https://webstroyka.com.ua">
                 webstroyka.com.ua
               </a>
             </span>
@@ -35,6 +34,6 @@ function Post() {
       </div>
     </div>
   );
-};
+}
 
-export default Post;
+export default Info;

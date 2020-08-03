@@ -1,5 +1,5 @@
 import profileReducer from "./profile-reducer";
-import dialogsReducer from "./dialogs-reducer";
+import dialogReducer from "./dialog-reducer";
 import sidebarReducer from "./sidebar-reducer";
 
 
@@ -37,25 +37,28 @@ let store = {
       ],
       newPostText: '',
     },
-    dataDialog: {
-      dialogs: [
-        {name: 'Dima', id: 1, active: false},
-        {name: 'Sasha', id: 2, active: true},
-        {name: 'Sveta', id: 3, active: false},
-        {name: 'Kolya', id: 4, active: false},
-        {name: 'Katya', id: 5, active: false},
-        {name: 'Pavel', id: 6, active: false},
-      ]
+    dialogPage: {
+      dataDialog: {
+        dialogs: [
+          {name: 'Dima', id: 1, active: false},
+          {name: 'Sasha', id: 2, active: true},
+          {name: 'Sveta', id: 3, active: false},
+          {name: 'Kolya', id: 4, active: false},
+          {name: 'Katya', id: 5, active: false},
+          {name: 'Pavel', id: 6, active: false},
+        ]
+      },
+      dataMessage: {
+        messages: [
+          {id: 1, message: 'Hi, how are you?', likes: 12},
+          {id: 2, message: 'It`s my first post', likes: 11},
+          {id: 3, message: 'Tru-la-la', likes: 5},
+          {id: 4, message: 'Ku-ku', likes: 9},
+        ],
+        newMessageBody: 'hello',
+      }
     },
-    dataMessage: {
-      messages: [
-        {id: 1, message: 'Hi, how are you?', likes: 12},
-        {id: 2, message: 'It`s my first post', likes: 11},
-        {id: 3, message: 'Tru-la-la', likes: 5},
-        {id: 4, message: 'Ku-ku', likes: 9},
-      ],
-      newMessageBody: '',
-    },
+    sidebar: {}
   },
 
   getState() {
@@ -71,13 +74,13 @@ let store = {
   subscribe(observer) {
     this._callSubscriber = observer;
   },
-  
+
   // Method ... dispatch
   dispatch(action) {
 
     this._state.profilePage = profileReducer(this._state.profilePage, action);
-    this._state.dataMessage = dialogsReducer(this._state.dataMessage, action);
-    this._state.dataDialog = sidebarReducer(this._state.dataDialog, action);
+    this._state.dialogPage = dialogReducer(this._state.dialogPage, action);
+    this._state.dataDialog = sidebarReducer(this._state.sidebar, action);
 
     this._callSubscriber(this._state);
   }

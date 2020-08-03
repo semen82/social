@@ -5,8 +5,9 @@ import Message from "./Message/Message";
 import {
   updateNewMessageActionCreator,
   sendMessageActionCreator
-} from "../../Redux/dialogs-reducer";
+} from "../../Redux/dialog-reducer";
 import {createKey} from "../../Redux/store";
+
 
 function Dialogs(props) {
   const {dataDialog, dataMessage, dispatch} = props;

@@ -13,6 +13,6 @@ function PostList(props) {
       }
     </ul>
   );
-}
+};
 
 export default PostList;

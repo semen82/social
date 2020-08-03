@@ -3,7 +3,23 @@ import {createKey} from "./store";
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 
-const profileReducer = (state, action) => {
+let defaultState= {
+  posts: [
+    {
+      id: createKey(),
+      post: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+      likes: 12
+    },
+    {
+      id: createKey(),
+      post: 'Lorem ipsum dolor sit amet, ctetur adipisicing elit.',
+      likes: 34
+    },
+  ],
+  newPostText: '',
+}
+
+const profileReducer = (state = defaultState, action) => {
 
   switch (action.type) {
     case ADD_POST: {

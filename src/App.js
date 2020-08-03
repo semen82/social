@@ -12,8 +12,7 @@ import {Route, Switch} from "react-router-dom";
 
 function App(props) {
   const {dispatch} = props;
-  const {dataDialog, profilePage, dataMessage} = props.state;
-
+  const {profilePage, dialogPage} = props.state;
   return (
     <div className="App">
       <Header/>
@@ -29,9 +28,9 @@ function App(props) {
 
           <Route path='/dialogs'
                  render={() => <Dialogs
-                   dataDialog={dataDialog}
+                   dataDialog={dialogPage.dataDialog}
                    dispatch={dispatch}
-                   dataMessage={dataMessage}
+                   dataMessage={dialogPage.dataMessage}
                  />}
           />
 

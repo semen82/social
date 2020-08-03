@@ -2,9 +2,9 @@ import React from 'react';
 import './Profile.css';
 import profileHeader from './profile-header.jpg';
 
-import About from './About/About';
 import PostList from './PostList/PostList';
 import NewPost from './NewPost/NewPost';
+import Info from "./Info/Info";
 
 function Profile(props) {
   const {posts, newPostText, dispatch} = props;
@@ -14,7 +14,7 @@ function Profile(props) {
         <img src={profileHeader} alt=""/>
       </div>
 
-      <About />
+      <Info />
 
       <NewPost
         dispatch={dispatch}
