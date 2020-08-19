@@ -49,3 +49,31 @@
 .dialogs button:active {
   color: crimson;
 }
+
+.dialogs-list .dialog {
+  font-size: 18px;
+  padding: 10px 50px 10px 10px;
+  cursor: pointer;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.dialogs-list .dialog.active {
+  background-color: #e3bbff;
+}
+
+.dialogs-list .dialog a {
+  text-decoration: none;
+  color: #232323;
+}
+
+.messages {
+  padding: 15px;
+  flex-grow: 1;
+  background-color: #e3bbff;
+  border-radius: 5px;
+}
+
+.messages .message {
+  margin-bottom: 15px;
+}

@@ -1,63 +1,83 @@
-import {createKey} from "./store";
+import { createKey } from '../components/common/functions/functions';
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const SET_PROFILE = 'SET_PROFILE';
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 
-let defaultState= {
+let defaultState = {
   posts: [
     {
       id: createKey(),
       post: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-      likes: 12
-    },
-    {
-      id: createKey(),
-      post: 'Lorem ipsum dolor sit amet, ctetur adipisicing elit.',
-      likes: 34
+      likes: 12,
     },
   ],
   newPostText: '',
-}
+  profile: {},
+  isFetching: false,
+};
 
 const profileReducer = (state = defaultState, action) => {
+  let newState = { ...state };
 
   switch (action.type) {
     case ADD_POST: {
-      let newPostText = state.newPostText;
+      let newPostText = newState.newPostText;
+      // проверка на пустоту
       if (!newPostText) {
         alert('Невозможно создать пост без текста');
-        return false;
+        return state;
       }
-
+      // создаём новый пост
       let newPost = {
         id: createKey(),
         post: newPostText,
-        likes: 0
+        likes: 0,
       };
+      // меняем состояние
+      newState.posts = [newPost, ...state.posts];
+      newState.newPostText = '';
 
-      state.posts.push(newPost);
-      state.newPostText = '';
-
-      return state;
+      return newState;
     }
     case UPDATE_NEW_POST_TEXT: {
-      state.newPostText = action.newText;
+      newState.newPostText = action.newText;
 
-      return state;
+      return newState;
+    }
+    case SET_PROFILE: {
+      newState.profile = action.profile;
+
+      return newState;
+    }
+    case TOGGLE_IS_FETCHING: {
+      newState.isFetching = action.isFetching;
+      return newState;
     }
     default:
       return state;
   }
 };
 
-// ... creator
-export const addPostActionCreator = () => {
-  return {type: ADD_POST};
+// ... actionCreator
+export const addPost = () => {
+  return { type: ADD_POST };
 };
 
-// ... creator
-export const updateNewPostActionCreator = (text) => {
-  return {type: UPDATE_NEW_POST_TEXT, newText: text};
+// ... actionCreator
+export const updateNewPost = (text) => {
+  return { type: UPDATE_NEW_POST_TEXT, newText: text };
+};
+
+// ... actionCreator
+export const setProfile = (profile) => {
+  return { type: SET_PROFILE, profile };
+};
+
+// ... actionCreator
+export const toggleIsFetching = (isFetching) => {
+  return { type: TOGGLE_IS_FETCHING, isFetching };
 };
 
 export default profileReducer;

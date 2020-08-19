@@ -3,48 +3,32 @@ import './App.css';
 
 import Header from './components/Header/Header';
 import NavBar from './components/NavBar/NavBar';
-import Profile from './components/Profile/Profile';
-import Dialogs from "./components/Dialogs/Dialogs";
-import News from "./components/News/News";
-import Music from "./components/Music/Music";
-import Settings from "./components/Settings/Settings";
-import {Route, Switch} from "react-router-dom";
+import News from './components/News/News';
+import Music from './components/Music/Music';
+import Settings from './components/Settings/Settings';
+import { Route, Switch } from 'react-router-dom';
+import DialogsContainer from './components/Dialogs/DialogsContainer';
+import UsersContainer from './components/Users/UsersContainer';
+import ProfileContainer from './components/Profile/ProfileContainer';
 
-function App(props) {
-  const {dispatch} = props;
-  const {profilePage, dialogPage} = props.state;
+function App() {
   return (
     <div className="App">
-      <Header/>
+      <Header />
       <div className="container">
-        <NavBar/>
+        <NavBar />
         <Switch>
-          <Route exact path='/'
-                 render={() => <Profile
-                   posts={profilePage.posts}
-                   dispatch={dispatch}
-                   newPostText={profilePage.newPostText}/>}
-          />
+          <Route path="/profile" component={ProfileContainer} />
 
-          <Route path='/dialogs'
-                 render={() => <Dialogs
-                   dataDialog={dialogPage.dataDialog}
-                   dispatch={dispatch}
-                   dataMessage={dialogPage.dataMessage}
-                 />}
-          />
+          <Route path="/dialogs" component={DialogsContainer} />
 
-          <Route path='/news'
-                 render={() => <News/>}
-          />
+          <Route path="/news" render={() => <News />} />
 
-          <Route path='/music'
-                 render={() => <Music/>}
-          />
+          <Route path="/music" render={() => <Music />} />
 
-          <Route path='/settings'
-                 render={() => <Settings/>}
-          />
+          <Route path="/users" component={UsersContainer} />
+
+          <Route path="/settings" render={() => <Settings />} />
         </Switch>
       </div>
     </div>

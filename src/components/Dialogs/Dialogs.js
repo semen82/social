@@ -1,51 +1,43 @@
-import React from 'react';
-import './Dialogs.css';
-import Dialog from "./Dialog/Dialog";
-import Message from "./Message/Message";
-import {
-  updateNewMessageActionCreator,
-  sendMessageActionCreator
-} from "../../Redux/dialog-reducer";
-import {createKey} from "../../Redux/store";
+import React from "react";
+import "./Dialogs.css";
+import { NavLink } from "react-router-dom";
 
-
-function Dialogs(props) {
-  const {dataDialog, dataMessage, dispatch} = props;
-
-  const linkTextarea = React.createRef();
-
-  const updateMessage = () => {
-    let text = linkTextarea.current.value;
-    dispatch(updateNewMessageActionCreator(text));
-  }
-
-  const sendMess = () => {
-    dispatch(sendMessageActionCreator());
-  }
-
+function Dialogs({
+  dialogs,
+  messages,
+  updateMessage,
+  newMessageBody,
+  sendMess,
+}) {
   return (
     <div className="dialogs">
       <ul className="dialogs-list">
-        {
-          dataDialog.dialogs.map(item => {
-            return <Dialog key={createKey()}
-                           name={item.name}
-                           id={item.id}
-                           classActive={item.active}/>
-          })
-        }
+        {dialogs.map((item) => {
+          let styleClass = "dialog";
+
+          if (item.classActive) {
+            styleClass += " active";
+          }
+          return (
+            <li key={item.id} className={styleClass}>
+              <NavLink to={`/dialogs/${item.id}`}>{item.name}</NavLink>
+            </li>
+          );
+        })}
       </ul>
       <ul className="messages">
-        {
-          dataMessage.messages.map(item => {
-            return <Message key={createKey()} message={item.message}/>
-          })
-        }
+        {messages.map((item) => {
+          return (
+            <li key={item.id} className="message">
+              {item.message}
+            </li>
+          );
+        })}
         <div className="add-message">
-          <textarea ref={linkTextarea}
-                    placeholder="Сообщение ..."
-                    onChange={updateMessage}
-                    value={dataMessage.newMessageBody}
+          <textarea
+            placeholder="Сообщение ..."
+            onChange={updateMessage}
+            value={newMessageBody}
           />
 
           <button onClick={sendMess}>Отправить</button>

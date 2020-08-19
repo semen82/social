@@ -1,3 +1,21 @@
 .posts {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
+}
+
+.post {
+  padding: 15px;
+  background-color: rgb(238, 238, 238);
+  border: 1px solid rgba(0, 0, 0, 0.336);
+  box-shadow: 2px 2px 10px rgba(128, 128, 128, 0.342);
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.post .avatar {
+  margin-right: 30px;
+}
+
+.post .avatar img {
+  width: 48px;
+  height: auto;
 }
