@@ -17,6 +17,8 @@ let initialState = {
   currentPage: 1,
   // прелоадер
   isFetching: false,
+  // Всего страниц
+  countPages: 0,
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -43,12 +45,17 @@ const usersReducer = (state = initialState, action) => {
         }),
       };
 
+    // сетает юзеров в стейт
     case SET_USERS:
       return { ...state, users: action.users };
-    // return { ...state, users: [...state.users, ...action.users] };
 
+    // сетает колличество пользователей и колличество страниц для пагинации
     case SET_TOTAL_COUNT:
-      return { ...state, totalUsersCount: action.totalCount };
+      return {
+        ...state,
+        totalUsersCount: action.totalCount,
+        countPages: Math.ceil(state.totalUsersCount / state.pageSize),
+      };
 
     case SET_CURRENT_PAGE:
       return { ...state, currentPage: action.page };

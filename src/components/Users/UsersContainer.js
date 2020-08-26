@@ -22,8 +22,7 @@ class UsersContainer extends Component {
       )
       .then((response) => {
         this.props.toggleIsFetching(false);
-        // console.log(response.data);
-        // this.props.setTotalCount(response.data.totalCount);
+        this.props.setTotalCount(response.data.totalCount);
         this.props.setUsers(response.data.items);
       });
   }
@@ -37,17 +36,22 @@ class UsersContainer extends Component {
       )
       .then((response) => {
         this.props.toggleIsFetching(false);
-        // console.log(response.data);
-        // this.props.setTotalCount(response.data.totalCount);
+        this.props.setTotalCount(response.data.totalCount);
         this.props.setUsers(response.data.items);
       });
   };
 
   onPrevPage = () => {
-    console.log('prev');
+    let page = this.props.currentPage > 1 ? this.props.currentPage - 1 : 1;
+    this.onPageChanged(page);
   };
   onNextPage = () => {
-    console.log('next');
+    let pages = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
+    let page =
+      this.props.currentPage < pages
+        ? this.props.currentPage + 1
+        : this.props.currentPage;
+    this.onPageChanged(page);
   };
 
   createArrayForPages = (userCount, pageSize) => {
@@ -59,25 +63,37 @@ class UsersContainer extends Component {
     return arr;
   };
 
-  render() {
-    const pages = this.createArrayForPages(
-      this.props.totalUsersCount,
-      this.props.pageSize
-    );
-    console.log(pages);
+  setPagesPagination = (currentPage) => {
+    if (currentPage <= 1) {
+      return [
+        { id: currentPage, page: currentPage, styleClass: 'active' },
+        { id: currentPage + 1, page: currentPage + 1 },
+      ];
+    } else if (currentPage === this.props.countPages) {
+      return [
+        { id: currentPage - 1, page: currentPage - 1 },
+        { id: currentPage, page: currentPage, styleClass: 'active' },
+      ];
+    } else {
+      return [
+        { id: currentPage - 1, page: currentPage - 1 },
+        { id: currentPage, page: currentPage, styleClass: 'active' },
+        { id: currentPage + 1, page: currentPage + 1 },
+      ];
+    }
+  };
 
+  render() {
     return (
       <>
         {this.props.isFetching ? <Preloader /> : null}
         <Users
-          pages={pages}
+          pagesPagination={this.setPagesPagination(this.props.currentPage)}
           users={this.props.users}
-          onPageChanged={this.onPageChanged}
           follow={this.props.follow}
           unfollow={this.props.unfollow}
-          currentPage={this.props.currentPage}
-          onPrevPage={this.props.onPrevPage}
-          onNextPage={this.props.onNextPage}
+          onPrevPage={this.onPrevPage}
+          onNextPage={this.onNextPage}
         />
       </>
     );
@@ -91,6 +107,7 @@ const mapStateToProps = (state) => {
     totalUsersCount: state.usersPage.totalUsersCount,
     currentPage: state.usersPage.currentPage,
     isFetching: state.usersPage.isFetching,
+    countPages: state.usersPage.countPages,
   };
 };
 

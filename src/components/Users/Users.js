@@ -6,13 +6,11 @@ import { NavLink } from 'react-router-dom';
 const Users = (props) => {
   const {
     users,
-    pages,
-    onPageChanged,
-    currentPage,
     follow,
     unfollow,
     onPrevPage,
     onNextPage,
+    pagesPagination,
   } = props;
 
   return (
@@ -23,21 +21,10 @@ const Users = (props) => {
           Назад
         </span>
         <div className="nums">
-          {pages.map((item) => {
-            if (item === currentPage) {
-              return (
-                <span
-                  key={item}
-                  className="active"
-                  onClick={() => onPageChanged(item)}
-                >
-                  {item}
-                </span>
-              );
-            }
+          {pagesPagination.map((item) => {
             return (
-              <span key={item} onClick={(event) => onPageChanged(item)}>
-                {item}
+              <span key={item.id} className={item.styleClass}>
+                {item.page}
               </span>
             );
           })}

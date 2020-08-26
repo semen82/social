@@ -17,19 +17,17 @@ function App() {
       <Header />
       <div className="container">
         <NavBar />
-        <Switch>
-          <Route path="/profile" component={ProfileContainer} />
+        <Route path="/profile/:userId?" component={ProfileContainer} />
 
-          <Route path="/dialogs" component={DialogsContainer} />
+        <Route path="/dialogs" component={DialogsContainer} />
 
-          <Route path="/news" render={() => <News />} />
+        <Route path="/news" render={() => <News />} />
 
-          <Route path="/music" render={() => <Music />} />
+        <Route path="/music" render={() => <Music />} />
 
-          <Route path="/users" component={UsersContainer} />
+        <Route path="/users" component={UsersContainer} />
 
-          <Route path="/settings" render={() => <Settings />} />
-        </Switch>
+        <Route path="/settings" render={() => <Settings />} />
       </div>
     </div>
   );
