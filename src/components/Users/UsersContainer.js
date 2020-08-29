@@ -1,44 +1,17 @@
 import './Users.css';
 import { connect } from 'react-redux';
 import Users from './Users';
-import {
-  follow,
-  unfollow,
-  setUsers,
-  setCurrentPage,
-  setTotalCount,
-  toggleIsFetching,
-} from '../../Redux/users-reducer';
-import * as axios from 'axios';
+import { getUsers, follow, unfollow } from '../../Redux/users-reducer';
 import React, { Component } from 'react';
 import Preloader from '../common/Preloader/Preloader';
 
 class UsersContainer extends Component {
   componentDidMount() {
-    this.props.toggleIsFetching(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
-      )
-      .then((response) => {
-        this.props.toggleIsFetching(false);
-        this.props.setTotalCount(response.data.totalCount);
-        this.props.setUsers(response.data.items);
-      });
+    this.props.getUsers(this.props.currentPage, this.props.pageSize);
   }
 
   onPageChanged = (page) => {
-    this.props.setCurrentPage(page);
-    this.props.toggleIsFetching(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`
-      )
-      .then((response) => {
-        this.props.toggleIsFetching(false);
-        this.props.setTotalCount(response.data.totalCount);
-        this.props.setUsers(response.data.items);
-      });
+    this.props.getUsers(page, this.props.pageSize);
   };
 
   onPrevPage = () => {
@@ -49,18 +22,9 @@ class UsersContainer extends Component {
     let pages = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
     let page =
       this.props.currentPage < pages
-        ? this.props.currentPage + 1
+        ? +this.props.currentPage + 1
         : this.props.currentPage;
     this.onPageChanged(page);
-  };
-
-  createArrayForPages = (userCount, pageSize) => {
-    let arr = [];
-    let pages = Math.ceil(userCount / pageSize);
-    for (let i = 1; i <= pages; i++) {
-      arr[i - 1] = i;
-    }
-    return arr;
   };
 
   setPagesPagination = (currentPage) => {
@@ -90,10 +54,11 @@ class UsersContainer extends Component {
         <Users
           pagesPagination={this.setPagesPagination(this.props.currentPage)}
           users={this.props.users}
-          follow={this.props.follow}
-          unfollow={this.props.unfollow}
           onPrevPage={this.onPrevPage}
           onNextPage={this.onNextPage}
+          followingInProgress={this.props.followingInProgress}
+          follow={this.props.follow}
+          unfollow={this.props.unfollow}
         />
       </>
     );
@@ -108,16 +73,22 @@ const mapStateToProps = (state) => {
     currentPage: state.usersPage.currentPage,
     isFetching: state.usersPage.isFetching,
     countPages: state.usersPage.countPages,
+    followingInProgress: state.usersPage.followingInProgress,
   };
 };
 
-const dispatches = {
-  follow,
-  unfollow,
-  setUsers,
-  setTotalCount,
-  setCurrentPage,
-  toggleIsFetching,
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getUsers: (currentPage, pageSize) => {
+      dispatch(getUsers(currentPage, pageSize));
+    },
+    follow: (userId) => {
+      dispatch(follow(userId));
+    },
+    unfollow: (userId) => {
+      dispatch(unfollow(userId));
+    },
+  };
 };
 
-export default connect(mapStateToProps, dispatches)(UsersContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);

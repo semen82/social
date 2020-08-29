@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 
-import Header from './components/Header/Header';
+import HeaderContainer from './components/Header/HeaderContainer';
 import NavBar from './components/NavBar/NavBar';
 import News from './components/News/News';
 import Music from './components/Music/Music';
@@ -14,20 +14,23 @@ import ProfileContainer from './components/Profile/ProfileContainer';
 function App() {
   return (
     <div className="App">
-      <Header />
+      <HeaderContainer />
       <div className="container">
         <NavBar />
-        <Route path="/profile/:userId?" component={ProfileContainer} />
+        <Switch>
+          <Route path="/profile/:userId?" component={ProfileContainer} />
 
-        <Route path="/dialogs" component={DialogsContainer} />
+          <Route path="/dialogs" component={DialogsContainer} />
 
-        <Route path="/news" render={() => <News />} />
+          <Route path="/news" render={() => <News />} />
 
-        <Route path="/music" render={() => <Music />} />
+          <Route path="/music" render={() => <Music />} />
 
-        <Route path="/users" component={UsersContainer} />
+          <Route path="/users" component={UsersContainer} />
 
-        <Route path="/settings" render={() => <Settings />} />
+          <Route path="/settings" render={() => <Settings />} />
+          <Route path="/login" render={() => <Settings />} />
+        </Switch>
       </div>
     </div>
   );

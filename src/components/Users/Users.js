@@ -11,6 +11,7 @@ const Users = (props) => {
     onPrevPage,
     onNextPage,
     pagesPagination,
+    followingInProgress,
   } = props;
 
   return (
@@ -34,24 +35,35 @@ const Users = (props) => {
         </span>
       </div>
       {users.map((user) => {
-        let btnFollowed = user.followed ? (
-          <button className="follow" onClick={() => unfollow(user.id)}>
-            Отписатся
-          </button>
-        ) : (
-          <button className="follow" onClick={() => follow(user.id)}>
-            Подписатся
-          </button>
-        );
-        let avatar = user.photos.small ? user.photos.small : userAvatar;
-
         return (
           <div className="user" key={user.id}>
             <div className="left">
               <NavLink to={'/profile/' + user.id}>
-                <img src={avatar} alt="avatar" />
+                <img
+                  src={user.photos.small ? user.photos.small : userAvatar}
+                  alt="avatar"
+                />
               </NavLink>
-              {btnFollowed}
+
+              {/* Кнопка подписки */}
+              {user.followed ? (
+                <button
+                  disabled={followingInProgress.some((id) => id === user.id)}
+                  className="follow"
+                  onClick={() => unfollow(user.id)}
+                >
+                  Отписатся
+                </button>
+              ) : (
+                <button
+                  disabled={followingInProgress.some((id) => id === user.id)}
+                  className="follow"
+                  onClick={() => follow(user.id)}
+                >
+                  Подписатся
+                </button>
+              )}
+              {/* Кнопка подписки. Конец */}
             </div>
             <div className="right">
               <section>

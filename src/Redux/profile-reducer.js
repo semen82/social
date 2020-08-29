@@ -1,4 +1,5 @@
 import { createKey } from '../components/common/functions/functions';
+import { usersAPI } from '../api/api';
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
@@ -78,6 +79,17 @@ export const setProfile = (profile) => {
 // ... actionCreator
 export const toggleIsFetching = (isFetching) => {
   return { type: TOGGLE_IS_FETCHING, isFetching };
+};
+
+export const getProfile = (id) => {
+  return (dispatch) => {
+    const userId = id ? id : 11134;
+    dispatch(toggleIsFetching(true));
+    usersAPI.getProfile(userId).then((data) => {
+      dispatch(setProfile(data));
+      dispatch(toggleIsFetching(false));
+    });
+  };
 };
 
 export default profileReducer;

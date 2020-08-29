@@ -88,6 +88,11 @@
   border: 1px solid #5659c9;
 }
 
+#users .user .left button:disabled {
+  background-color: #afafaf;
+  border: 1px solid #797979;
+}
+
 #users .user .right {
   width: 100%;
   padding-left: 15px;
