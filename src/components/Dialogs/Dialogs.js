@@ -1,22 +1,22 @@
-import React from "react";
-import "./Dialogs.css";
-import { NavLink } from "react-router-dom";
+import React from 'react';
+import './Dialogs.css';
+import { NavLink } from 'react-router-dom';
 
 function Dialogs({
   dialogs,
   messages,
-  updateMessage,
+  updateNewMessage,
   newMessageBody,
-  sendMess,
+  sendMessage,
 }) {
   return (
     <div className="dialogs">
       <ul className="dialogs-list">
         {dialogs.map((item) => {
-          let styleClass = "dialog";
+          let styleClass = 'dialog';
 
           if (item.classActive) {
-            styleClass += " active";
+            styleClass += ' active';
           }
           return (
             <li key={item.id} className={styleClass}>
@@ -36,11 +36,11 @@ function Dialogs({
         <div className="add-message">
           <textarea
             placeholder="Сообщение ..."
-            onChange={updateMessage}
+            onChange={(e) => updateNewMessage(e.target.value)}
             value={newMessageBody}
           />
 
-          <button onClick={sendMess}>Отправить</button>
+          <button onClick={sendMessage}>Отправить</button>
         </div>
       </ul>
     </div>

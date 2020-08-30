@@ -4,10 +4,10 @@ import profileHeader from './profile-header.jpg';
 
 import PostList from './PostList/PostList';
 import MyPost from './MyPost/MyPost';
-// import avatar from './avatar.jpg';
+import defaultAvatar from '../../assets/images/defaultAvatar.png';
 
 const Profile = (props) => {
-  const { onPostChange, newPostText, posts, addPost, profile } = props;
+  const { updateNewPost, newPostText, posts, addPost, profile } = props;
   return (
     <div id="profile">
       <div className="profile-header">
@@ -15,7 +15,7 @@ const Profile = (props) => {
       </div>
       <div className="profile-info">
         <div className="avatar">
-          <img src={profile.photos.small} alt="Аватарка" />
+          <img src={profile.photos.small || defaultAvatar} alt="Аватарка" />
         </div>
         <div className="data">
           <div className="name">
@@ -43,7 +43,7 @@ const Profile = (props) => {
 
       <MyPost
         newPostText={newPostText}
-        onPostChange={onPostChange}
+        updateNewPost={updateNewPost}
         addPost={addPost}
       />
 

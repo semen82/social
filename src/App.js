@@ -10,6 +10,7 @@ import { Route, Switch } from 'react-router-dom';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
+import Login from './components/Login/Login';
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
       <div className="container">
         <NavBar />
         <Switch>
+          <Route path="/login" component={Login} />
+
           <Route path="/profile/:userId?" component={ProfileContainer} />
 
           <Route path="/dialogs" component={DialogsContainer} />
@@ -29,7 +32,6 @@ function App() {
           <Route path="/users" component={UsersContainer} />
 
           <Route path="/settings" render={() => <Settings />} />
-          <Route path="/login" render={() => <Settings />} />
         </Switch>
       </div>
     </div>

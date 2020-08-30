@@ -57,12 +57,12 @@ const dialogReducer = (state = defaultState, action) => {
 };
 
 // ... creator
-export const updateNewMessageActionCreator = (body) => {
+export const updateNewMessage = (body) => {
   return { type: UPDATE_NEW_MESSAGE_BODY, newText: body };
 };
 
 // ... creator
-export const sendMessageActionCreator = () => {
+export const sendMessage = () => {
   return {
     type: SEND_MESSAGE,
   };

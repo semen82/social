@@ -4,6 +4,8 @@ import Users from './Users';
 import { getUsers, follow, unfollow } from '../../Redux/users-reducer';
 import React, { Component } from 'react';
 import Preloader from '../common/Preloader/Preloader';
+import { compose } from 'redux';
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 
 class UsersContainer extends Component {
   componentDidMount() {
@@ -91,4 +93,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withAuthRedirect
+)(UsersContainer);

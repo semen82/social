@@ -1,0 +1,10 @@
+.login {
+  width: 100%;
+  background-color: rgb(162, 226, 255);
+  padding: 15px;
+}
+
+.login h1 {
+  margin-top: 0;
+  color: brown;
+}

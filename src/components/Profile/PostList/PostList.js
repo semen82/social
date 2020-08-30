@@ -1,6 +1,6 @@
 import React from 'react';
 import './PostList.css';
-// import avatar from './avatar.jpg';
+import defaultAvatar from '../../../assets/images/defaultAvatar.png';
 
 function PostList(props) {
   const { posts, avatar } = props;
@@ -10,7 +10,7 @@ function PostList(props) {
         return (
           <li className="post" key={item.id}>
             <div className="avatar">
-              <img src={avatar} alt="Аватарка" />
+              <img src={avatar || defaultAvatar} alt="Аватарка" />
             </div>
             <div className="message">
               <span>{item.post}</span>
